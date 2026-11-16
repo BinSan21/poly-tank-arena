@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POLY TANK // ARENA 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header id="hud" class="hidden">
+    <div class="hud-module hull-module">
+      <div class="hud-label">HULL INTEGRITY</div>
+      <div class="hp-track">
+        <div id="hp-bar-fill" class="hp-fill"></div>
+      </div>
+      <div class="hud-value"><span id="hp-val">100</span>%</div>
+      <div class="lives-row">LIVES: <span id="lives-val">&#9830; &#9830; &#9830;</span></div>
+      <div id="buff-status" class="buff-tag hidden">SYSTEM NORMAL</div>
+    </div>
+
+    <div class="hud-module sector-module">
+      <div class="sector-tag">SECTOR <span id="wave-val">01/10</span></div>
+      <div class="hostile-tag">HOSTILES: <span id="enemies-val">0</span></div>
+      <div id="diff-badge" class="diff-badge">VETERAN</div>
+    </div>
+
+    <div class="hud-module score-module">
+      <div class="hud-label">COMBAT SCORE</div>
+      <div class="hud-value accent-amber"><span id="score-val">0000</span></div>
+      <div class="hud-hint">[ESC / P] PAUSE</div>
+    </div>
+  </header>
+
+  <!-- Main Title & Mission Result Overlay -->
+  <div id="overlay">
+    <div class="briefing-card">
+      <div id="overlay-sys-tag" class="sys-tag">SYS.ONLINE // 10-SECTOR ARMOR CAMPAIGN</div>
+      <h1 id="overlay-title">POLY TANK<br /><span>ARENA 3D</span></h1>
+      <p id="overlay-sub" class="title-sub">CLEAR ALL 10 SECTORS &bull; DEFEAT SECTOR 05 &amp; 10 BOSSES &bull; 3 LIVES</p>
+
+      <!-- Difficulty Selector -->
+      <div class="diff-section">
+        <div class="diff-label">SELECT COMBAT DIFFICULTY</div>
+        <div class="diff-selector">
+          <button type="button" class="diff-btn" data-diff="recruit">
+            <strong>RECRUIT</strong>
+            <span>125 HP &bull; LIGHT AI</span>
+          </button>
+          <button type="button" class="diff-btn active" data-diff="veteran">
+            <strong>VETERAN</strong>
+            <span>100 HP &bull; STANDARD</span>
+          </button>
+          <button type="button" class="diff-btn" data-diff="ace">
+            <strong>ACE</strong>
+            <span>80 HP &bull; LETHAL AI</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="controls-grid">
+        <div class="ctrl-item"><kbd>W A S D</kbd><span>DRIVE &amp; STEER</span></div>
+        <div class="ctrl-item"><kbd>MOUSE</kbd><span>AIM TURRET</span></div>
+        <div class="ctrl-item"><kbd>LMB / SPACE</kbd><span>RICOCHET SHELL</span></div>
+      </div>
+
+      <div class="settings-row">
+        <button type="button" class="toggle-btn btn-self-dmg">SELF-DAMAGE: OFF</button>
+        <button type="button" class="toggle-btn btn-mute">AUDIO: ON</button>
+      </div>
+
+      <button id="btn-start">START CAMPAIGN</button>
+      <button type="button" id="btn-title-return" class="secondary-title-btn hidden">MAIN TITLE SCREEN</button>
+    </div>
+  </div>
+
+  <!-- Tactical Pause Overlay -->
+  <div id="pause-overlay" class="hidden">
+    <div class="briefing-card pause-card">
+      <div class="sys-tag">SIMULATION SUSPENDED</div>
+      <h2>TACTICAL PAUSE</h2>
+
+      <div class="pause-actions">
+        <button id="btn-resume">RESUME COMBAT</button>
+        <button type="button" class="toggle-btn btn-self-dmg">SELF-DAMAGE: OFF</button>
+        <button type="button" class="toggle-btn btn-mute">AUDIO: ON</button>
+        <button id="btn-abort" class="danger-btn">RETURN TO TITLE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sector / Respawn Transition Banner -->
+  <div id="sector-banner" class="hidden">
+    <div id="banner-title" class="banner-title">SECTOR 01</div>
+    <div id="banner-sub" class="banner-sub">HULL RESTORED TO 100%</div>
+    <div id="banner-count" class="banner-count">3</div>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>
